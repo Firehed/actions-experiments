@@ -1,0 +1,19 @@
+name: Workflow Run
+
+on:
+  workflow_run:
+    workflows:
+      - Build
+    types:
+      - completed
+    branches:
+      - main
+
+jobs:
+  show-context:
+    name: Show context
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v1
+
