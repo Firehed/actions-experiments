@@ -1,0 +1,22 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    # Build all PRs
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    outputs:
+      test: ${{ steps.test.outputs.test }}
+    steps:
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v1
+
+      - name: Generate output
+        id: test
+        run: echo "::set-output name=test::hello"
