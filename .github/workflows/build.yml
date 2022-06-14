@@ -3,7 +3,8 @@ name: Build
 on:
   push:
     branches:
-      - main 
+      - main
+      - runtest
   pull_request:
     # Build all PRs
 
