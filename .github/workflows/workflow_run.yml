@@ -4,10 +4,6 @@ on:
   workflow_run:
     workflows:
       - Build
-    types:
-      - completed
-    branches:
-      - main
 
 jobs:
   show-context:
