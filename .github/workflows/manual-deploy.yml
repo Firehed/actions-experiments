@@ -1,0 +1,31 @@
+name: Manual Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: Target environment
+        options:
+          - staging
+          - production
+        required: true
+        type: choice
+
+jobs:
+  staging:
+    name: Staging
+    if: inputs.target == 'staging'
+    uses: ./.github/workflows/deploy-reusable.yml
+    with:
+      environment-name: staging
+    secrets:
+      TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  prod:
+    name: Production
+    if: inputs.target == 'production'
+    uses: ./.github/workflows/deploy-reusable.yml
+    with:
+      environment-name: production
+    secrets:
+      TOKEN: ${{ secrets.GITHUB_TOKEN }}

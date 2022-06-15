@@ -1,0 +1,22 @@
+name: Deploy (reusable)
+
+on:
+  workflow_call:
+    inputs:
+      environment-name:
+        required: true
+        type: string
+    secrets:
+      TOKEN:
+        required: true
+
+jbos:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v1
+
+      - name: Show input
+        run: echo ${{ inputs.environment-name }}
