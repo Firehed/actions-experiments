@@ -10,7 +10,7 @@ on:
       TOKEN:
         required: true
 
-jbos:
+jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
