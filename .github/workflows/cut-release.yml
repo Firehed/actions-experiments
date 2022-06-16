@@ -50,4 +50,4 @@ jobs:
           github_token: ${{ github.token }}
           source_ref: production
           target_branch: main
-          commit_message_template: '[Automated] Merged production back into dev
+          commit_message_template: '[Automated] Merged production back into dev'
