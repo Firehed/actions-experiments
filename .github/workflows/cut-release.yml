@@ -18,11 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      # - name: Check out
-      #   uses: actions/checkout@v3
-      #   with:
-      #     ref: main
-
       - name: Merge branch
         uses: everlytic/branch-merge@1.1.2
         with:
@@ -36,10 +31,6 @@ jobs:
     if: inputs.target == 'production'
     runs-on: ubuntu-latest
     steps:
-      - name: Check out
-        uses: actions/checkout@v3
-        with:
-          ref: staging
 
       - name: Merge branch
         uses: everlytic/branch-merge@1.1.2
