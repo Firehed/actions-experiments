@@ -22,6 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      # (Hotfix addition line)
+
       - name: Merge branch
         uses: everlytic/branch-merge@1.1.2
         with:
