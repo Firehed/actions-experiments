@@ -1,0 +1,40 @@
+name: Prepare Release Branch
+
+on:
+  workflow_call:
+    inputs:
+      target:
+        description: Target environment
+        options:
+          - staging
+          - production
+        required: true
+        type: choice
+
+jobs:
+  staging:
+    name: Staging
+    if: inputs.target == 'staging'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge branch
+        uses: everlytic/branch-merge@1.1.2
+        with:
+          github_token: ${{ github.token }}
+          source_ref: main
+          target_branch: staging
+          commit_message_template: '[Automated] Merged main into staging'
+
+  prod:
+    name: Production
+    if: inputs.target == 'production'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge branch
+        uses: everlytic/branch-merge@1.1.2
+        with:
+          github_token: ${{ github.token }}
+          source_ref: staging
+          target_branch: production
+          commit_message_template: '[Automated] Merged staging into production'
+
