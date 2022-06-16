@@ -1,7 +1,7 @@
 name: Prepare Release Branch
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       target:
         description: Target environment
