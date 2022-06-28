@@ -8,6 +8,12 @@ on:
       - production
   pull_request:
     # Build all PRs
+  # HACK: also listen on workflow_run to avoid needing to set up PAT
+    workflow_run:
+      workflows:
+        - Prepare Release Branch
+      types:
+        - completed
 
 jobs:
   build:
