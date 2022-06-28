@@ -46,3 +46,10 @@ jobs:
           target_branch: production
           commit_message_template: '[Automated] Merged staging into production'
 
+      - name: Merge prod back into main
+        uses: everlytic/branch-merge@1.1.2
+        with:
+          github_token: ${{ github.token }}
+          source_ref: production
+          target_branch: main
+          commit_message_template: '[Automated] Merged production back into dev'
