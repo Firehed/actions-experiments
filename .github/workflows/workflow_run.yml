@@ -4,6 +4,12 @@ on:
   workflow_run:
     workflows:
       - Build
+    branches:
+      - main
+      - staging
+      - production
+    types:
+      - completed
 
 jobs:
   show-context:
@@ -13,3 +19,23 @@ jobs:
       - name: Dump context
         uses: crazy-max/ghaction-dump-context@v1
 
+  run-on-main:
+    name: Runs on main
+    if: github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Ran on main
+
+  run-on-staging:
+    name: Runs on staging
+    if: github.event.workflow_run.head_branch == 'staging'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Ran on production
+
+  run-on-production:
+    name: Runs on main
+    if: github.event.workflow_run.head_branch == 'production'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo Ran on production
