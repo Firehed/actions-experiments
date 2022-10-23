@@ -22,7 +22,8 @@ jobs:
         run: kustomize edit set image ${{ inputs.image }}
 
       - name: Commit change
-        run: git commit
+        run: |-
+          git commit
           --all
           --message="GHA: Deploy ${{ inputs.image }} to ${{ inputs.overlay }}"
 
