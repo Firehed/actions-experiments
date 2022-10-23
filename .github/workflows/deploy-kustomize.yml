@@ -1,0 +1,35 @@
+on:
+  workflow_call:
+    inputs:
+      image:
+        required: true
+      overlay:
+        required: true
+    secrets:
+      GITHUB_TOKEN:
+        required: true
+
+jobs:
+  simulate-deploy:
+    name: Simulated Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v3
+
+      - name: Apply change w/ Kustomize
+        working-directory: overlays/${{ inputs.overlay }}
+        run: kustomize edit set image ${{ inputs.image }}
+
+      - name: Commit change
+        run: git commit
+          --all
+          --message="GHA: Deploy ${{ inputs.image }} to ${{ inputs.overlay }}"
+
+      - name: Push
+        run: git push
+
+      - name: Apply to cluster
+        # kubectl apply -k overlays/${{ inputs.overlay }}
+        run: kustomize build overlays/${{ inputs.overlay }}
+
