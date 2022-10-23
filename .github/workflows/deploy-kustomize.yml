@@ -5,9 +5,9 @@ on:
         required: true
       overlay:
         required: true
-    secrets:
-      GITHUB_TOKEN:
-        required: true
+    # secrets:
+    #   TOKEN:
+    #     required: true
 
 jobs:
   simulate-deploy:
