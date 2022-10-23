@@ -29,3 +29,19 @@ jobs:
       environment-name: production
     secrets:
       TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  through-dispatch:
+    name: Through dispatch
+    runs-on: ubuntu-latest
+    steps:
+      - name: gogogo
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          # token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: ${{ github.repository }}
+          event-type: deploy
+          client-payload: |-
+            {
+              "image": "alpine:${{ github.sha }}",
+              "overlay": "${{ inputs.target }}"
+            }
