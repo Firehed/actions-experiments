@@ -23,6 +23,9 @@ jobs:
         working-directory: overlays/${{ inputs.overlay }}
         run: kustomize edit set image ${{ inputs.image }}
 
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v1
+
       - name: Commit change
         run: |-
           git commit
