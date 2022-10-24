@@ -3,8 +3,10 @@ on:
     inputs:
       image:
         required: true
+        type: string
       overlay:
         required: true
+        type: string
     # secrets:
     #   TOKEN:
     #     required: true
