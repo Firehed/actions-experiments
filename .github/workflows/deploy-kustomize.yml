@@ -32,6 +32,7 @@ jobs:
         run: |-
           git commit
           --all
+          --author="${{ github.actor }} <${{ github.actor }}@users.noreply.github.com"
           --message="GHA: Deploy ${{ inputs.image }} to ${{ inputs.overlay }}"
 
       - name: Push
