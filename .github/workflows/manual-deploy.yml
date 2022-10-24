@@ -36,7 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call other one through curl
-        run: curl
+        run: >
+          curl
           -X POST
           -H "Accept: application/vnd.github+json"
           -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}"
