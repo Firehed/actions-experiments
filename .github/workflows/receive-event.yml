@@ -1,16 +1,30 @@
 name: Receive Event
 
 on:
-  repository_dispatch:
+  # repository_dispatch
     # all events?
+  workflow_dispatch:
+    inputs:
+      overlay:
+        description: Target environment
+        options:
+          - production
+          - staging
+        required: true
+        type: choice
+      image:
+        description: The new image
+        required: true
+        type: string
+
 
 jobs:
   deploy-with-kustomize:
     # if: github.event.action = 'deploy'
     uses: ./.github/workflows/deploy-kustomize.yml
     with:
-      image: ${{ github.event.client_payload.image }}
-      overlay: ${{ github.event.client_payload.overlay }}
-    secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      image: ${{ inputs.image }}
+      overlay: ${{ inputs.overlay }}
+    # secrets:
+    #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

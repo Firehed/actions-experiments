@@ -30,18 +30,16 @@ jobs:
     secrets:
       TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  through-dispatch:
-    name: Through dispatch
+  # just to simulate other one!
+  through-other-event:
+    name: Proxy to receive event
     runs-on: ubuntu-latest
     steps:
-      - name: gogogo
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          # token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          repository: ${{ github.repository }}
-          event-type: deploy
-          client-payload: |-
-            {
-              "image": "alpine:${{ github.sha }}",
-              "overlay": "${{ inputs.target }}"
-            }
+      - name: Call other one through curl
+        run: |-
+          curl
+          -X POST
+          -H "Accept: application/vnd.github+json"
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}"
+          https://api.github.com/repos/${{ github.repository }}/actions/workflows/WORKFLOW_ID/dispatches
+          -d '{"ref":"${{ github.ref }}","inputs":{"image":"${{ inputs.target}}","overlay":"${{ github.sha"}}'
