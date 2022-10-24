@@ -4,4 +4,4 @@ resources:
 - ../../bases/deploy
 images:
 - name: alpine
-  newTag: post-test
+  newTag: 202321f932e433ef3c6fd08d3bef0efee4cc3de8
