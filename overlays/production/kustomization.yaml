@@ -4,4 +4,4 @@ resources:
 - ../../bases/deploy
 images:
 - name: alpine
-  newTag: latest
+  newTag: webuitest
