@@ -69,4 +69,7 @@ jobs:
     steps:
       - uses: crazy-max/ghaction-dump-context@v1
       - uses: actions/checkout@v3
+        with:
+          # Retarget the originating branch instead of specific commit
+          ref: ${{ github.ref }}
       - run: git show
