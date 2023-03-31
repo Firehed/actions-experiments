@@ -7,7 +7,7 @@ on:
       - edited
 
 jobs:
-  pr:
+  recognize-deploy:
     name: PR comment
     if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
     runs-on: ubuntu-latest
@@ -27,12 +27,23 @@ jobs:
           comment-id: ${{ github.event.comment.id }}
           reactions: "+1"
 
-      - name: trigger deploy-reusable
-        uses: ./.github/workflows/deploy-reusable.yml
-        with:
-          environment-name: production
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: respond with reaction
+  deploy:
+    needs:
+      - recognize-deploy
+    uses: ./.github/workflows/deploy-reusable.yml
+    with:
+      environment-name: production
+    secrets:
+      TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  after-deploy:
+    needs:
+      - deploy
+    steps:
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v1
+
+      - name: show positive reaction
         uses: peter-evans/create-or-update-comment@v2
         with:
           comment-id: ${{ github.event.comment.id }}
