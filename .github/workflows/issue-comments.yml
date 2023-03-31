@@ -8,7 +8,7 @@ on:
 
 jobs:
   recognize-deploy:
-    name: PR comment
+    name: Indicate command seen
     if: github.event.issue.pull_request && contains(github.event.comment.body, '/deploy')
     runs-on: ubuntu-latest
     steps:
@@ -37,8 +37,10 @@ jobs:
       TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   after-deploy:
+    name: Indiate deploy started
     needs:
       - deploy
+    runs-on: ubuntu-latest
     steps:
       - name: Dump context
         uses: crazy-max/ghaction-dump-context@v1
