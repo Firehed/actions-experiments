@@ -6,6 +6,7 @@ on:
       - created
       - edited
 
+
 jobs:
   recognize-deploy:
     name: Indicate command seen
