@@ -1,0 +1,21 @@
+name: Use environments
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: environment
+        required: true
+        description: Where to run
+
+jobs:
+  use-env:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.env }}
+    steps:
+      - name: print env
+        run: echo ENV=${{ vars.ENV }}
+
+      - name: show secret
+        run: echo TOP_SECRET=$(echo ${{ secrets.TOP_SECRET }} | base64)
+
