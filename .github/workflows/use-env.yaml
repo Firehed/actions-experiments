@@ -19,3 +19,6 @@ jobs:
       - name: show secret
         run: echo TOP_SECRET=$(echo ${{ secrets.TOP_SECRET }} | base64)
 
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v1
+
